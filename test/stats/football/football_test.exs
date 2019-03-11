@@ -67,8 +67,22 @@ defmodule Stats.FootballTest do
   describe "football_rushing_stats" do
     alias Stats.Football.Rushing
 
-    @valid_attrs %{att: 42, entry_id: "some entry_id", fum: 42, position: "some position", tds: 42, yds: 42}
-    @update_attrs %{att: 43, entry_id: "some updated entry_id", fum: 43, position: "some updated position", tds: 43, yds: 43}
+    @valid_attrs %{
+      att: "42",
+      entry_id: "some entry_id",
+      fum: "42",
+      position: "some position",
+      tds: "42",
+      yds: "42"
+    }
+    @update_attrs %{
+      att: "43",
+      entry_id: "some updated entry_id",
+      fum: "43",
+      position: "some updated position",
+      tds: "43",
+      yds: "43"
+    }
     @invalid_attrs %{att: nil, entry_id: nil, fum: nil, position: nil, tds: nil, yds: nil}
 
     def rushing_fixture(attrs \\ %{}) do
@@ -92,12 +106,12 @@ defmodule Stats.FootballTest do
 
     test "create_rushing/1 with valid data creates a rushing" do
       assert {:ok, %Rushing{} = rushing} = Football.create_rushing(@valid_attrs)
-      assert rushing.att == 42
+      assert rushing.att == "42"
       assert rushing.entry_id == "some entry_id"
-      assert rushing.fum == 42
+      assert rushing.fum == "42"
       assert rushing.position == "some position"
-      assert rushing.tds == 42
-      assert rushing.yds == 42
+      assert rushing.tds == "42"
+      assert rushing.yds == "42"
     end
 
     test "create_rushing/1 with invalid data returns error changeset" do
@@ -107,12 +121,12 @@ defmodule Stats.FootballTest do
     test "update_rushing/2 with valid data updates the rushing" do
       rushing = rushing_fixture()
       assert {:ok, %Rushing{} = rushing} = Football.update_rushing(rushing, @update_attrs)
-      assert rushing.att == 43
+      assert rushing.att == "43"
       assert rushing.entry_id == "some updated entry_id"
-      assert rushing.fum == 43
+      assert rushing.fum == "43"
       assert rushing.position == "some updated position"
-      assert rushing.tds == 43
-      assert rushing.yds == 43
+      assert rushing.tds == "43"
+      assert rushing.yds == "43"
     end
 
     test "update_rushing/2 with invalid data returns error changeset" do
@@ -136,8 +150,22 @@ defmodule Stats.FootballTest do
   describe "football_passing_stats" do
     alias Stats.Football.Passing
 
-    @valid_attrs %{cmp: 42, entry_id: "some entry_id", int: 42, position: "some position", tds: 42, yds: 42}
-    @update_attrs %{cmp: 43, entry_id: "some updated entry_id", int: 43, position: "some updated position", tds: 43, yds: 43}
+    @valid_attrs %{
+      cmp: "42",
+      entry_id: "some entry_id",
+      int: "42",
+      position: "some position",
+      tds: "42",
+      yds: "42"
+    }
+    @update_attrs %{
+      cmp: "43",
+      entry_id: "some updated entry_id",
+      int: "43",
+      position: "some updated position",
+      tds: "43",
+      yds: "43"
+    }
     @invalid_attrs %{cmp: nil, entry_id: nil, int: nil, position: nil, tds: nil, yds: nil}
 
     def passing_fixture(attrs \\ %{}) do
@@ -161,12 +189,12 @@ defmodule Stats.FootballTest do
 
     test "create_passing/1 with valid data creates a passing" do
       assert {:ok, %Passing{} = passing} = Football.create_passing(@valid_attrs)
-      assert passing.cmp == 42
+      assert passing.cmp == "42"
       assert passing.entry_id == "some entry_id"
-      assert passing.int == 42
+      assert passing.int == "42"
       assert passing.position == "some position"
-      assert passing.tds == 42
-      assert passing.yds == 42
+      assert passing.tds == "42"
+      assert passing.yds == "42"
     end
 
     test "create_passing/1 with invalid data returns error changeset" do
@@ -176,12 +204,12 @@ defmodule Stats.FootballTest do
     test "update_passing/2 with valid data updates the passing" do
       passing = passing_fixture()
       assert {:ok, %Passing{} = passing} = Football.update_passing(passing, @update_attrs)
-      assert passing.cmp == 43
+      assert passing.cmp == "43"
       assert passing.entry_id == "some updated entry_id"
-      assert passing.int == 43
+      assert passing.int == "43"
       assert passing.position == "some updated position"
-      assert passing.tds == 43
-      assert passing.yds == 43
+      assert passing.tds == "43"
+      assert passing.yds == "43"
     end
 
     test "update_passing/2 with invalid data returns error changeset" do
@@ -205,8 +233,20 @@ defmodule Stats.FootballTest do
   describe "football_receiving_stats" do
     alias Stats.Football.Receiving
 
-    @valid_attrs %{entry_id: "some entry_id", position: "some position", rec: 42, tds: 42, yds: 42}
-    @update_attrs %{entry_id: "some updated entry_id", position: "some updated position", rec: 43, tds: 43, yds: 43}
+    @valid_attrs %{
+      entry_id: "some entry_id",
+      position: "some position",
+      rec: "42",
+      tds: "42",
+      yds: "42"
+    }
+    @update_attrs %{
+      entry_id: "some updated entry_id",
+      position: "some updated position",
+      rec: "43",
+      tds: "43",
+      yds: "43"
+    }
     @invalid_attrs %{entry_id: nil, position: nil, rec: nil, tds: nil, yds: nil}
 
     def receiving_fixture(attrs \\ %{}) do
@@ -232,9 +272,9 @@ defmodule Stats.FootballTest do
       assert {:ok, %Receiving{} = receiving} = Football.create_receiving(@valid_attrs)
       assert receiving.entry_id == "some entry_id"
       assert receiving.position == "some position"
-      assert receiving.rec == 42
-      assert receiving.tds == 42
-      assert receiving.yds == 42
+      assert receiving.rec == "42"
+      assert receiving.tds == "42"
+      assert receiving.yds == "42"
     end
 
     test "create_receiving/1 with invalid data returns error changeset" do
@@ -246,9 +286,9 @@ defmodule Stats.FootballTest do
       assert {:ok, %Receiving{} = receiving} = Football.update_receiving(receiving, @update_attrs)
       assert receiving.entry_id == "some updated entry_id"
       assert receiving.position == "some updated position"
-      assert receiving.rec == 43
-      assert receiving.tds == 43
-      assert receiving.yds == 43
+      assert receiving.rec == "43"
+      assert receiving.tds == "43"
+      assert receiving.yds == "43"
     end
 
     test "update_receiving/2 with invalid data returns error changeset" do
@@ -272,9 +312,30 @@ defmodule Stats.FootballTest do
   describe "football_kicking_stats" do
     alias Stats.Football.Kicking
 
-    @valid_attrs %{entry_id: "some entry_id", extra_pt_att: 42, extra_pt_made: 42, fld_goals_att: 42, fld_goals_made: 42, position: "some position"}
-    @update_attrs %{entry_id: "some updated entry_id", extra_pt_att: 43, extra_pt_made: 43, fld_goals_att: 43, fld_goals_made: 43, position: "some updated position"}
-    @invalid_attrs %{entry_id: nil, extra_pt_att: nil, extra_pt_made: nil, fld_goals_att: nil, fld_goals_made: nil, position: nil}
+    @valid_attrs %{
+      entry_id: "some entry_id",
+      extra_pt_att: "42",
+      extra_pt_made: "42",
+      fld_goals_att: "42",
+      fld_goals_made: "42",
+      position: "some position"
+    }
+    @update_attrs %{
+      entry_id: "some updated entry_id",
+      extra_pt_att: "43",
+      extra_pt_made: "43",
+      fld_goals_att: "43",
+      fld_goals_made: "43",
+      position: "some updated position"
+    }
+    @invalid_attrs %{
+      entry_id: nil,
+      extra_pt_att: nil,
+      extra_pt_made: nil,
+      fld_goals_att: nil,
+      fld_goals_made: nil,
+      position: nil
+    }
 
     def kicking_fixture(attrs \\ %{}) do
       {:ok, kicking} =
@@ -298,10 +359,10 @@ defmodule Stats.FootballTest do
     test "create_kicking/1 with valid data creates a kicking" do
       assert {:ok, %Kicking{} = kicking} = Football.create_kicking(@valid_attrs)
       assert kicking.entry_id == "some entry_id"
-      assert kicking.extra_pt_att == 42
-      assert kicking.extra_pt_made == 42
-      assert kicking.fld_goals_att == 42
-      assert kicking.fld_goals_made == 42
+      assert kicking.extra_pt_att == "42"
+      assert kicking.extra_pt_made == "42"
+      assert kicking.fld_goals_att == "42"
+      assert kicking.fld_goals_made == "42"
       assert kicking.position == "some position"
     end
 
@@ -313,10 +374,10 @@ defmodule Stats.FootballTest do
       kicking = kicking_fixture()
       assert {:ok, %Kicking{} = kicking} = Football.update_kicking(kicking, @update_attrs)
       assert kicking.entry_id == "some updated entry_id"
-      assert kicking.extra_pt_att == 43
-      assert kicking.extra_pt_made == 43
-      assert kicking.fld_goals_att == 43
-      assert kicking.fld_goals_made == 43
+      assert kicking.extra_pt_att == "43"
+      assert kicking.extra_pt_made == "43"
+      assert kicking.fld_goals_att == "43"
+      assert kicking.fld_goals_made == "43"
       assert kicking.position == "some updated position"
     end
 
