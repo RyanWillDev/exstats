@@ -9,10 +9,10 @@ defmodule Stats.Football.Player do
   schema "football_players" do
     field :name, :string
     field :player_id, :string
-    has_many(:kicking_stats, Kicking)
-    has_many(:passing_stats, Passing)
-    has_many(:receiving_stats, Receiving)
-    has_many(:rushing_stats, Rushing)
+    has_many(:kicking_stats, Kicking, foreign_key: :player_id)
+    has_many(:passing_stats, Passing, foreign_key: :player_id)
+    has_many(:receiving_stats, Receiving, foreign_key: :player_id)
+    has_many(:rushing_stats, Rushing, foreign_key: :player_id)
 
     timestamps()
   end

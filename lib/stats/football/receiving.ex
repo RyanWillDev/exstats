@@ -7,7 +7,7 @@ defmodule Stats.Football.Receiving do
   alias Stats.Football.Player
 
   schema "football_receiving_stats" do
-    belongs_to :player, Player
+    belongs_to :player, Player, references: :player_id, type: :string
     field :entry_id, :string
     field :position, :string
     field :rec, :string

@@ -7,7 +7,7 @@ defmodule Stats.Football.Passing do
   alias Stats.Football.Player
 
   schema "football_passing_stats" do
-    belongs_to :player, Player
+    belongs_to :player, Player, references: :player_id, type: :string
     field :att, :string
     field :cmp, :string
     field :entry_id, :string
