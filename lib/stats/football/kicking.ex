@@ -10,10 +10,10 @@ defmodule Stats.Football.Kicking do
   schema "football_kicking_stats" do
     belongs_to :player, Player
     field :entry_id, :string
-    field :extra_pt_att, :integer
-    field :extra_pt_made, :integer
-    field :fld_goals_att, :integer
-    field :fld_goals_made, :integer
+    field :extra_pt_att, :string
+    field :extra_pt_made, :string
+    field :fld_goals_att, :string
+    field :fld_goals_made, :string
     field :position, :string
 
     timestamps()

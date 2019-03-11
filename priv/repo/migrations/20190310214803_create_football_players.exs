@@ -4,7 +4,7 @@ defmodule Stats.Repo.Migrations.CreateFootballPlayers do
   def change do
     create table(:football_players) do
       add :name, :string
-      add :player_id, :uuid
+      add :player_id, :string
 
       timestamps()
     end

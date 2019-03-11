@@ -5,13 +5,13 @@ defmodule Stats.Repo.Migrations.CreateFootballKickingStats do
     create table(:football_kicking_stats) do
       add :entry_id, :string
       add :position, :string
-      add :fld_goals_made, :integer
-      add :fld_goals_att, :integer
-      add :extra_pt_made, :integer
-      add :extra_pt_att, :integer
+      add :fld_goals_made, :string
+      add :fld_goals_att, :string
+      add :extra_pt_made, :string
+      add :extra_pt_att, :string
 
       add :player_id,
-          references(:football_players, column: :player_id, type: :uuid, on_delete: :nothing)
+          references(:football_players, column: :player_id, type: :string, on_delete: :nothing)
 
       timestamps()
     end

@@ -8,7 +8,7 @@ defmodule Stats.Football.Player do
 
   schema "football_players" do
     field :name, :string
-    field :player_id, Ecto.UUID
+    field :player_id, :string
     has_many(:kicking_stats, Kicking)
     has_many(:passing_stats, Passing)
     has_many(:receiving_stats, Receiving)

@@ -3,15 +3,16 @@ defmodule Stats.Repo.Migrations.CreateFootballPassingStats do
 
   def change do
     create table(:football_passing_stats) do
+      add :att, :string
       add :entry_id, :string
       add :position, :string
-      add :yds, :integer
-      add :tds, :integer
-      add :cmp, :integer
-      add :int, :integer
+      add :yds, :string
+      add :tds, :string
+      add :cmp, :string
+      add :int, :string
 
       add :player_id,
-          references(:football_players, column: :player_id, type: :uuid, on_delete: :nothing)
+          references(:football_players, column: :player_id, type: :string, on_delete: :nothing)
 
       timestamps()
     end

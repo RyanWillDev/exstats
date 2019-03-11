@@ -10,9 +10,9 @@ defmodule Stats.Football.Receiving do
     belongs_to :player, Player
     field :entry_id, :string
     field :position, :string
-    field :rec, :integer
-    field :tds, :integer
-    field :yds, :integer
+    field :rec, :string
+    field :tds, :string
+    field :yds, :string
 
     timestamps()
   end

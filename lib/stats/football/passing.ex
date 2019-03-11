@@ -8,12 +8,13 @@ defmodule Stats.Football.Passing do
 
   schema "football_passing_stats" do
     belongs_to :player, Player
-    field :cmp, :integer
+    field :att, :string
+    field :cmp, :string
     field :entry_id, :string
-    field :int, :integer
+    field :int, :string
     field :position, :string
-    field :tds, :integer
-    field :yds, :integer
+    field :tds, :string
+    field :yds, :string
 
     timestamps()
   end

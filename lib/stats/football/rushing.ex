@@ -7,12 +7,12 @@ defmodule Stats.Football.Rushing do
   alias Stats.Football.Player
 
   schema "football_rushing_stats" do
-    field :att, :integer
+    field :att, :string
     field :entry_id, :string
-    field :fum, :integer
+    field :fum, :string
     field :position, :string
-    field :tds, :integer
-    field :yds, :integer
+    field :tds, :string
+    field :yds, :string
     belongs_to :player, Player
 
     timestamps()
