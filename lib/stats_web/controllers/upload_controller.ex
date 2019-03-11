@@ -8,7 +8,7 @@ defmodule StatsWeb.UploadController do
     # There are duplicated players present in the MapSet, although MapSet should not allow them.
     players = stats.players |> MapSet.to_list() |> Enum.uniq_by(fn p -> p["player_id"] end)
 
-    transaction =
+    try do
       Ecto.Multi.new()
       |> Ecto.Multi.insert_all(:insert_all_player, "football_players", players)
       |> Ecto.Multi.insert_all(:insert_all_kicking, "football_kicking_stats", stats.kicking)
@@ -17,12 +17,16 @@ defmodule StatsWeb.UploadController do
       |> Ecto.Multi.insert_all(:insert_all_rushing, "football_rushing_stats", stats.rushing)
       |> Stats.Repo.transaction()
 
-    case transaction do
-      {:ok, _} ->
-        send_resp(conn, :no_content, "")
-
-      {:error, err, _val, _changes} ->
-        send_resp(conn, :unprocessable_entity, err)
+      send_resp(conn, :no_content, "")
+    rescue
+      _ ->
+        send_resp(
+          conn,
+          :unprocessable_entity,
+          Jason.encode!(%{
+            message: "An error occurred attempting to store the uploaded stats data"
+          })
+        )
     end
   end
 end
