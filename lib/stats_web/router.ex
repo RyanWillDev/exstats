@@ -8,10 +8,10 @@ defmodule StatsWeb.Router do
   scope "/api", StatsWeb do
     pipe_through :api
 
-    scope "/stats" do
-      scope "/football" do
-        post "/upload", UploadController, :upload
-      end
+    scope "/football" do
+      post "/", UploadController, :upload
+      get "/", FootballController, :get
+      get "/players", FootballController, :list_players
     end
   end
 end
