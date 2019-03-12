@@ -40,6 +40,10 @@ defmodule Stats.UploadParser.Football do
         MapSet.union(acc, players)
       end)
 
+      # There are duplicated players present in the MapSet, although MapSet should not allow them.
+      |> MapSet.to_list()
+      |> Enum.uniq_by(fn p -> p["player_id"] end)
+
     %{
       rushing: rushing_stats.stats_data,
       passing: passing_stats.stats_data,

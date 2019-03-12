@@ -4,16 +4,19 @@ defmodule Stats.Football do
   """
 
   import Ecto.Query, warn: false
-  alias Stats.Repo
+  alias Stats.{Football, Repo}
 
   alias Stats.Football.{Kicking, Passing, Player, Receiving, Rushing}
 
-  @spec stats_by_players(maybe_improper_list()) :: %{
-          kicking: any(),
-          passing: any(),
-          receiving: any(),
-          rushing: any()
+  @type stats :: %{
+          optional(:players) => list(),
+          kicking: list(),
+          passing: list(),
+          receiving: list(),
+          rushing: list()
         }
+
+  @spec stats_by_players(maybe_improper_list()) :: Football.stats()
   def stats_by_players(player_ids) when is_list(player_ids) do
     [kicking, passing, receiving, rushing] =
       [Kicking, Passing, Receiving, Rushing]
@@ -27,7 +30,7 @@ defmodule Stats.Football do
     %{kicking: kicking, passing: passing, receiving: receiving, rushing: rushing}
   end
 
-  @spec all_stats() :: %{kicking: any(), passing: any(), receiving: any(), rushing: any()}
+  @spec all_stats() :: Football.stats()
   def all_stats do
     [kicking, passing, receiving, rushing] =
       [Kicking, Passing, Receiving, Rushing]
@@ -38,6 +41,46 @@ defmodule Stats.Football do
       |> Enum.map(&Repo.all/1)
 
     %{kicking: kicking, passing: passing, receiving: receiving, rushing: rushing}
+  end
+
+  @spec store_stats(Football.stats()) ::
+          {:error, :unique_violation | :unknown}
+          | {:ok, Football.stats()}
+  def store_stats(
+        %{
+          kicking: kicking,
+          passing: passing,
+          players: players,
+          receiving: receiving,
+          rushing: rushing
+        } = stats
+      ) do
+    try do
+      Ecto.Multi.new()
+      |> Ecto.Multi.insert_all(:insert_all_player, "football_players", players,
+        on_conflict: :nothing
+      )
+      |> Ecto.Multi.insert_all(:insert_all_kicking, "football_kicking_stats", kicking)
+      |> Ecto.Multi.insert_all(:insert_all_passing, "football_passing_stats", passing)
+      |> Ecto.Multi.insert_all(:insert_all_receiving, "football_receiving_stats", receiving)
+      |> Ecto.Multi.insert_all(:insert_all_rushing, "football_rushing_stats", rushing)
+      |> Repo.transaction()
+
+      {:ok, stats}
+    rescue
+      error in Postgrex.Error ->
+        case error do
+          %Postgrex.Error{
+            postgres: %{
+              code: :unique_violation
+            }
+          } ->
+            {:error, :unique_violation}
+
+          _ ->
+            {:error, :unknown}
+        end
+    end
   end
 
   @doc """
