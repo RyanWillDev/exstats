@@ -26,6 +26,7 @@ defmodule Stats.Football.Kicking do
     :extra_pt_made,
     :fld_goals_att,
     :fld_goals_made,
+    :player_id,
     :position
   ]
   @all_attrs @allowed_attrs ++ @required_attrs

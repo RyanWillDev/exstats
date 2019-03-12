@@ -23,6 +23,7 @@ defmodule Stats.Football.Rushing do
     :att,
     :entry_id,
     :fum,
+    :player_id,
     :position,
     :tds,
     :yds

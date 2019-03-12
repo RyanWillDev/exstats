@@ -21,9 +21,11 @@ defmodule Stats.Football.Passing do
 
   @allowed_attrs []
   @required_attrs [
+    :att,
     :cmp,
     :entry_id,
     :int,
+    :player_id,
     :position,
     :tds,
     :yds

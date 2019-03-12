@@ -20,6 +20,7 @@ defmodule Stats.Football.Receiving do
   @allowed_attrs []
   @required_attrs [
     :entry_id,
+    :player_id,
     :position,
     :rec,
     :tds,
