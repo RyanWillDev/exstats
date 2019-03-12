@@ -18,5 +18,6 @@ defmodule Stats.Repo.Migrations.CreateFootballPassingStats do
     end
 
     create index(:football_passing_stats, [:player_id])
+    create unique_index(:football_passing_stats, [:entry_id])
   end
 end

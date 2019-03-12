@@ -16,5 +16,6 @@ defmodule Stats.Repo.Migrations.CreateFootballReceivingStats do
     end
 
     create index(:football_receiving_stats, [:player_id])
+    create unique_index(:football_receiving_stats, [:entry_id])
   end
 end
