@@ -11,11 +11,17 @@ defmodule StatsWeb.FootballController do
     render(conn, "football_stats.json", stats: stats)
   end
 
-  def get(conn, _) do
+  def get(conn, %{"players" => _}) do
     conn
     |> put_view(StatsWeb.ErrorView)
     |> put_status(:bad_request)
     |> render("400.json", %{message: "Invalid list of player ids."})
+  end
+
+  def get(conn, _) do
+    stats = Football.all_stats()
+
+    render(conn, "football_stats.json", stats: stats)
   end
 
   @spec list_players(Plug.Conn.t(), any()) :: Plug.Conn.t()
