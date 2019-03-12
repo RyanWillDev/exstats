@@ -8,12 +8,31 @@ defmodule Stats.Football do
 
   alias Stats.Football.{Kicking, Passing, Player, Receiving, Rushing}
 
+  @spec stats_by_players(maybe_improper_list()) :: %{
+          kicking: any(),
+          passing: any(),
+          receiving: any(),
+          rushing: any()
+        }
   def stats_by_players(player_ids) when is_list(player_ids) do
     [kicking, passing, receiving, rushing] =
       [Kicking, Passing, Receiving, Rushing]
       |> Enum.map(fn schema ->
         schema
         |> where([s], s.player_id in ^player_ids)
+        |> preload(:player)
+      end)
+      |> Enum.map(&Repo.all/1)
+
+    %{kicking: kicking, passing: passing, receiving: receiving, rushing: rushing}
+  end
+
+  @spec all_stats() :: %{kicking: any(), passing: any(), receiving: any(), rushing: any()}
+  def all_stats do
+    [kicking, passing, receiving, rushing] =
+      [Kicking, Passing, Receiving, Rushing]
+      |> Enum.map(fn schema ->
+        schema
         |> preload(:player)
       end)
       |> Enum.map(&Repo.all/1)
