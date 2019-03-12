@@ -65,9 +65,15 @@ defmodule Stats.FootballTest do
   end
 
   describe "football_rushing_stats" do
+    setup _ do
+      %Stats.Football.Player{} = player_fixture()
+      :ok
+    end
+
     alias Stats.Football.Rushing
 
     @valid_attrs %{
+      player_id: "some player_id",
       att: "42",
       entry_id: "some entry_id",
       fum: "42",
@@ -150,7 +156,14 @@ defmodule Stats.FootballTest do
   describe "football_passing_stats" do
     alias Stats.Football.Passing
 
+    setup _ do
+      %Stats.Football.Player{} = player_fixture()
+      :ok
+    end
+
     @valid_attrs %{
+      att: "42",
+      player_id: "some player_id",
       cmp: "42",
       entry_id: "some entry_id",
       int: "42",
@@ -159,6 +172,7 @@ defmodule Stats.FootballTest do
       yds: "42"
     }
     @update_attrs %{
+      att: "43",
       cmp: "43",
       entry_id: "some updated entry_id",
       int: "43",
@@ -233,7 +247,13 @@ defmodule Stats.FootballTest do
   describe "football_receiving_stats" do
     alias Stats.Football.Receiving
 
+    setup _ do
+      %Stats.Football.Player{} = player_fixture()
+      :ok
+    end
+
     @valid_attrs %{
+      player_id: "some player_id",
       entry_id: "some entry_id",
       position: "some position",
       rec: "42",
@@ -312,7 +332,13 @@ defmodule Stats.FootballTest do
   describe "football_kicking_stats" do
     alias Stats.Football.Kicking
 
+    setup _ do
+      %Stats.Football.Player{} = player_fixture()
+      :ok
+    end
+
     @valid_attrs %{
+      player_id: "some player_id",
       entry_id: "some entry_id",
       extra_pt_att: "42",
       extra_pt_made: "42",
