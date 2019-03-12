@@ -1,6 +1,6 @@
 defmodule StatsWeb.FootballControllerTest do
   use StatsWeb.ConnCase
-  alias Stats.{Football, Football.Kicking, Football.Passing, Football.Receiving, Football.Rushing}
+  alias Stats.Football
 
   describe "list all players" do
     setup [:create_player]
@@ -20,7 +20,8 @@ defmodule StatsWeb.FootballControllerTest do
   describe "retreiving list of stats by player_id" do
     setup [:create_player, :create_stats]
 
-    test "returns a list of all stats for a given player_id(s) when provided a list of player_id(s)" do
+    test "returns a list of all stats for a given player_id(s) when provided a list of player_id(s)",
+         %{conn: conn} do
       %{
         kicking: kicking,
         passing: passing,
@@ -78,10 +79,10 @@ defmodule StatsWeb.FootballControllerTest do
   end
 
   defp create_stats(_) do
-    {:ok, _} = Football.create_kicking(stats_data.kicking)
-    {:ok, _} = Football.create_passing(stats_data.passing)
-    {:ok, _} = Football.create_receiving(stats_data.receiving)
-    {:ok, _} = Football.create_rushing(stats_data.rushing)
+    {:ok, _} = Football.create_kicking(stats_data().kicking)
+    {:ok, _} = Football.create_passing(stats_data().passing)
+    {:ok, _} = Football.create_receiving(stats_data().receiving)
+    {:ok, _} = Football.create_rushing(stats_data().rushing)
 
     :ok
   end

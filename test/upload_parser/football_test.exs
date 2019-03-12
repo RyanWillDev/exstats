@@ -7,7 +7,7 @@ defmodule Stats.UploadParser.FootballTest do
     test "returns a MapSet of all players" do
       %{players: players} = Football.parse(stats_data())
 
-      assert MapSet.size(players) == 4
+      assert length(players) == 4
     end
 
     test "returns lists of all uploaded stats" do
