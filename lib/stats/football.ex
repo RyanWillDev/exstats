@@ -6,7 +6,19 @@ defmodule Stats.Football do
   import Ecto.Query, warn: false
   alias Stats.Repo
 
-  alias Stats.Football.Player
+  alias Stats.Football.{Kicking, Passing, Player, Receiving, Rushing}
+
+  def stats_by_players(player_ids) when is_list(player_ids) do
+    [kicking, passing, receiving, rushing] =
+      [Kicking, Passing, Receiving, Rushing]
+      |> Enum.map(fn schema ->
+        from(s in schema, where: s.player_id in ^player_ids)
+        |> preload(:player)
+      end)
+      |> Enum.map(&Repo.all/1)
+
+    %{kicking: kicking, passing: passing, receiving: receiving, rushing: rushing}
+  end
 
   @doc """
   Returns the list of football_players.
