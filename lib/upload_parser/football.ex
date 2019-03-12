@@ -54,21 +54,11 @@ defmodule Stats.UploadParser.Football do
   end
 
   defp get_stats(stats, type) do
-    common = get_common_stats(stats)
-
     traverse_stats(stats[type], %{players: MapSet.new(), stats_data: []}, %{
-      common: common,
       player_keys: ["player_id", "name"],
       stat_keys: @keys_for_stat_type[type],
       timestamps: %{"updated_at" => DateTime.utc_now(), "inserted_at" => DateTime.utc_now()}
     })
-  end
-
-  defp get_common_stats(stats) do
-    stats
-    |> Map.take(["week", "competitionName", "seasonID"])
-    |> Enum.map(fn {key, value} -> {Macro.underscore(key), value} end)
-    |> Map.new()
   end
 
   defp traverse_stats([], stats_data, _) do
@@ -79,7 +69,6 @@ defmodule Stats.UploadParser.Football do
          [head | tail],
          %{players: players, stats_data: stats_data},
          %{
-           common: common_stats,
            player_keys: player_keys,
            stat_keys: stat_keys,
            timestamps: timestamps
@@ -88,11 +77,6 @@ defmodule Stats.UploadParser.Football do
     stats_data =
       head
       |> Map.take(stat_keys)
-      # TODO (RW): Remove common keys if not used
-      # |> Map.merge(common_stats)
-      # |> (fn common ->
-      #       Map.take(head, stat_keys) |> Map.merge(%{"common_stats" => common})
-      #     end).()
       |> (fn new_stat ->
             [Map.merge(new_stat, timestamps) | stats_data]
           end).()
