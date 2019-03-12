@@ -10,5 +10,10 @@ defmodule StatsWeb.UploadView do
   end
 
   def render("error.json", %{message: message}) do
+    %{
+      details: %{
+        error: message
+      }
+    }
   end
 end
