@@ -65,7 +65,8 @@ defmodule StatsWeb.FootballView do
   defp add_common_data(stat_data, stat) do
     player = Map.take(stat.player, [:player_id, :name])
 
-    Map.take(stat, [:entry_id, :position])
+    stat
+    |> Map.take([:entry_id, :position])
     |> Map.merge(stat_data)
     |> Map.merge(player)
   end

@@ -12,7 +12,8 @@ defmodule Stats.Football do
     [kicking, passing, receiving, rushing] =
       [Kicking, Passing, Receiving, Rushing]
       |> Enum.map(fn schema ->
-        from(s in schema, where: s.player_id in ^player_ids)
+        schema
+        |> where([s], s.player_id in ^player_ids)
         |> preload(:player)
       end)
       |> Enum.map(&Repo.all/1)
